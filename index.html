@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />  
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<div id="TC">
+			<div id="TC_city"></div>
+			<div id="TC_mingci"></div>
+			<div id="TC_value"></div>
+		</div>
+		<div id="loading">
+			<span>Loading...</span>
+	  		<div class="border">
+	  			<div class="circle"></div>
+	  		</div>
+	  	</div>
+		<div id="lefttm"></div>
+		<div id="righttm"></div>
+		<div id="righttm2"></div>
+		<div id="righttm3">待补该城市文字描述</div>
+		<div id="remen">全部城市</div>
+		<div id="header">
+			<a href="javascript:;">城市创新指数</a>
+			<a href="javascript:;" id="header_all">城市创新指数</a>
+			<a href="javascript:;" id="header_one">一级指标</a>
+			<div id="header_one_tc">
+				<div>创新资源</div>
+				<div>创新环境</div>
+				<div>创新服务</div>
+				<div>创新绩效</div>
+			</div>
+			<a href="javascript:;" id="header_two">二级指标</a>
+			<div id="header_two_tc">
+				<div>创新人才</div>
+				<div>研发经费</div><br />
+				<div>政策环境</div>
+				<div>人文环境</div>
+				<div>生活环境</div><br />
+				<div>科技条件</div>
+				<div>金融服务</div><br />
+				<div>科技成果</div>
+				<div>经济产出</div>
+				<div>结构优化</div>
+				<div>绿色发展</div>
+				<div>辐射引领</div>
+			</div>
+			<a href="javascript:;" id="header_three">三级指标</a>
+			<div id="header_three_tc">
+				<ul>
+					<li>每万人在校大学生数</li>
+					<li>城市化水平</li>
+					<li>万名从业人口中科学技术人员数</li>
+					<li>地方财政科技投入占地方财政支出比重</li>
+					<li>地方财政教育投入占地方财政支出比重</li>
+					<li>每万人吸引外商投资额</li>
+					<li>企业税收负担</li>
+					<li>每百人公共图书馆藏书拥有量</li>
+					<li>每百名学生拥有专任教师人数</li>
+					<li>每千人口拥有医院床位数</li>
+					<li>城市人均公园绿地面积</li>
+					<li>每万人拥有公共汽车数</li>
+				</ul>
+				<ul>
+					<li>每万人移动电话用户数</li>
+					<li>每万人互联网宽带接入用户数</li>
+					<li>新三板上市企业数</li>
+					<li>年末金融机构贷款余额增长率</li>
+					<li>创业板上市企业数</li>
+					<li>每万人SCI/SSCI/AHCI论文数</li>
+					<li>每万人发明专利授权量</li>
+					<li>城镇居民人均可支配收入</li>
+					<li>地均GDP</li>
+					<li>第二产业劳动生产率</li>
+					<li>第三产业劳动生产率</li>
+				</ul>
+				<ul>
+					<li>第三产业增加值占地区GDP比重</li>
+					<li>高科技产品进出口总额占地区GDP比重</li>
+					<li>万元地区生产总值水耗</li>
+					<li>城市污水处理率</li>
+					<li>生活垃圾无害化处理率</li>
+					<li>城市空气质量等级</li>
+					<li>全市在校普通高校学生数占全省比重</li>
+					<li>全市科学技术从业人员数占全省比重</li>
+					<li>国家技术转移示范机构数</li>
+					<li>ESI学科进入全球前1%个数</li>
+					<li>财富世界500强与中国500强企业数</li>
+				</ul>
+			</div>
+		</div>
+		<!--<div id="container"></div>-->
+		<div id="list">
+			<div id="list2"></div>
+			<div id="listss"></div>
+		</div>
+		<div id="main"></div>
+		<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/china.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.nicescroll.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://api.map.baidu.com/api?ak=NicyBAx5u9qjwLoBYVSKCzHFEWRTBj1B&v=2.0&services=false" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bmap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/data.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+		
+//		百度地图
+//		var map = new BMap.Map('main',{minZoom:4,maxZoom:8,enableMapClick:false});
+//		var point = new BMap.Point(86.39564,39.929986);
+//		map.centerAndZoom(point,5);
+//		map.enableScrollWheelZoom(true);
+
+		//顶部弹出层区域
+		var header_all = document.getElementById('header_all');
+		var righttm = document.getElementById('righttm');
+		var righttm2 = document.getElementById('righttm2');
+		var righttm3 = document.getElementById('righttm3');
+		var lefttm = document.getElementById('lefttm')
+		var header_one_tc = document.getElementById('header_one_tc');
+		var header_two_tc = document.getElementById('header_two_tc');
+		var header_three_tc = document.getElementById('header_three_tc')
+		var header_one = document.getElementById('header_one');
+		var header_two = document.getElementById('header_two');
+		var header_three = document.getElementById('header_three');
+		var TC_all = document.getElementById('TC');
+		var TC_city = document.getElementById('TC_city');
+		var TC_value = document.getElementById('TC_value');
+		var TC_mingci = document.getElementById('TC_mingci');
+		var header = document.getElementById('header');
+		var data1 = [];
+		var data2 = [];
+		var zb = {};
+		//一级指标
+		header_one.onmouseover = function(){
+			header_one_tc.style.display = 'block';
+		}
+		header_one.onmouseleave = function(){
+			header_one_tc.style.display = 'none';
+		}
+		header_one_tc.onmouseover = function(){
+			header_one_tc.style.display = 'block';
+		}
+		header_one_tc.onmouseleave = function(){
+			header_one_tc.style.display = 'none';
+		}
+		//二级指标
+		header_two.onmouseover = function(){
+			header_two_tc.style.display = 'block';
+		}
+		header_two.onmouseleave = function(){
+			header_two_tc.style.display = 'none';
+		}
+		header_two_tc.onmouseover = function(){
+			header_two_tc.style.display = 'block';
+		}
+		header_two_tc.onmouseleave = function(){
+			header_two_tc.style.display = 'none';
+		}
+		//三级指标
+		header_three.onmouseover = function(){
+			header_three_tc.style.display = 'block';
+		}
+		header_three.onmouseleave = function(){
+			header_three_tc.style.display = 'none';
+		}
+		header_three_tc.onmouseover = function(){
+			header_three_tc.style.display = 'block';
+		}
+		header_three_tc.onmouseleave = function(){
+			header_three_tc.style.display = 'none';
+		}
+		var header_one_tclis = header_one_tc.getElementsByTagName('div');
+		var header = document.getElementById('header');
+		var headera = header.getElementsByTagName('a')[0];
+//		loadingFn()
+		function loadingFn(){
+			var loading = document.getElementById('loading');
+			loading.style.display = 'block';
+			header.style.display = 'none';
+			list.style.display = 'none';
+			loading.className = 'anni';
+			setTimeout(function(){
+				loading.className = '';
+				loading.style.display = 'none';
+				header.style.display = 'block';
+				list.style.display = 'block';
+			},1000)
+		}
+		//根据热门城市切换
+		var remen = document.getElementById('remen');
+		var remenOnf = 0;
+		remen.onclick = function(){
+			if(remenOnf==0){
+				this.innerHTML = '副省级以上城市';
+				changeRMDataFn(valnew,valnew2)
+				data1 = [];
+				remenOnf++;
+			}else if(remenOnf==1){
+				this.innerHTML = '非副省级以上城市';
+				var dataF = [];
+				for(var i=0;i<Data.length;i++){
+					for(var j=0;j<data.length;j++){
+						if(Data[i].name==data[j].name){
+							break;
+						}else if(j==data.length-1){
+							dataF.push(Data[i]);
+						}
+					}
+				}
+				data = dataF;
+				tab();
+				remenOnf++;
+			}else{
+				this.innerHTML = '全部城市';
+				changeDataFn(valnew,valnew2)
+				data1 = [];
+				remenOnf=0;
+			}
+		}
+		headera.onclick = function(){
+			tab();
+		}
+		//一级指标点击
+		header_one_tclis[0].onclick =function(){
+//			loadingFn()
+			if(remenOnf==0){
+				getDataFn('创新资源','ziyuan');
+			}else if(remenOnf==1){
+				getRMDataFn('创新资源','ziyuan');
+			}else{
+				getFRMDataFn('创新资源','ziyuan');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_one_tclis[1].onclick =function(){
+//			loadingFn()
+			if(remenOnf==0){
+				getDataFn('创新环境','huanjing');
+			}else if(remenOnf==1){
+				getRMDataFn('创新环境','huanjing');
+			}else{
+				getFRMDataFn('创新环境','huanjing');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_one_tclis[2].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('创新服务','fuwu');
+			}else if(remenOnf==1){
+				getRMDataFn('创新服务','fuwu');
+			}else{
+				getFRMDataFn('创新服务','fuwu');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_one_tclis[3].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('创新绩效','jixiao');
+			}else if(remenOnf==1){
+				getRMDataFn('创新绩效','jixiao');
+			}else{
+				getFRMDataFn('创新绩效','jixiao');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		//二级指标点击
+		var header_two_tclis = header_two_tc.getElementsByTagName('div');
+		header_two_tclis[0].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('创新人才','rencai');
+			}else if(remenOnf==1){
+				getRMDataFn('创新人才','rencai');
+			}else{
+				getFRMDataFn('创新人才','rencai');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[1].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('研发经费','jingfei');
+			}else if(remenOnf==1){
+				getRMDataFn('研发经费','jingfei');
+			}else{
+				getFRMDataFn('研发经费','jingfei');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[2].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('政策环境','zhengcehuanjing');
+			}else if(remenOnf==1){
+				getRMDataFn('政策环境','zhengcehuanjing');
+			}else{
+				getFRMDataFn('政策环境','zhengcehuanjing');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[3].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('人文环境','renwenhuanjing');
+			}else if(remenOnf==1){
+				getRMDataFn('人文环境','renwenhuanjing');
+			}else{
+				getFRMDataFn('人文环境','renwenhuanjing');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[4].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('生活环境','shenghuohuanjing');
+			}else if(remenOnf==1){
+				getRMDataFn('生活环境','shenghuohuanjing');
+			}else{
+				getFRMDataFn('生活环境','shenghuohuanjing');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[5].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('科技条件','kejitiaojian');
+			}else if(remenOnf==1){
+				getRMDataFn('科技条件','kejitiaojian');
+			}else{
+				getFRMDataFn('科技条件','kejitiaojian');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[6].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('金融服务','jinrongfuwu');
+			}else if(remenOnf==1){
+				getRMDataFn('金融服务','jinrongfuwu');
+			}else{
+				getFRMDataFn('金融服务','jinrongfuwu');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[7].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('科技成果','kejichengguo');
+			}else if(remenOnf==1){
+				getRMDataFn('科技成果','kejichengguo');
+			}else{
+				getFRMDataFn('科技成果','kejichengguo');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[8].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('经济产出','jingjichanchu');
+			}else if(remenOnf==1){
+				getRMDataFn('经济产出','jingjichanchu');
+			}else{
+				getFRMDataFn('经济产出','jingjichanchu');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[9].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('结构优化','jiegouyouhua');
+			}else if(remenOnf==1){
+				getRMDataFn('结构优化','jiegouyouhua');
+			}else{
+				getFRMDataFn('结构优化','jiegouyouhua');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[10].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('绿色发展','lvsefazhan');
+			}else if(remenOnf==1){
+				getRMDataFn('绿色发展','lvsefazhan');
+			}else{
+				getFRMDataFn('绿色发展','lvsefazhan');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_two_tclis[11].onclick =function(){
+			if(remenOnf==0){
+				getDataFn('辐射引领','fusheyinling');
+			}else if(remenOnf==1){
+				getRMDataFn('辐射引领','fusheyinling');
+			}else{
+				getFRMDataFn('辐射引领','fusheyinling');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		//三级指标点击
+		var header_three_tclis = header_three_tc.getElementsByTagName('li');
+		header_three_tclis[0].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人在校大学生数','z36');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人在校大学生数','z36');
+			}else{
+				getFRMDataFn('每万人在校大学生数','z36');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[1].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('城市化发展水平','z68');
+			}else if(remenOnf==1){
+				getRMDataFn('城市化发展水平','z68');
+			}else{
+				getFRMDataFn('城市化发展水平','z68');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[2].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('万名从业人口中从事科学技术服务业人员数','z69');
+			}else if(remenOnf==1){
+				getRMDataFn('万名从业人口中从事科学技术服务业人员数','z69');
+			}else{
+				getFRMDataFn('万名从业人口中从事科学技术服务业人员数','z69');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[3].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('地方财政科技投入占地方财政支出比重','z70');
+			}else if(remenOnf==1){
+				getRMDataFn('地方财政科技投入占地方财政支出比重','z70');
+			}else{
+				getFRMDataFn('地方财政科技投入占地方财政支出比重','z70');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[4].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('地方财政教育投入占地方财政支出比重','z71');
+			}else if(remenOnf==1){
+				getRMDataFn('地方财政教育投入占地方财政支出比重','z71');
+			}else{
+				getFRMDataFn('地方财政教育投入占地方财政支出比重','z71');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[5].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人吸引外商投资额（实际）','z72');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人吸引外商投资额（实际）','z72');
+			}else{
+				getFRMDataFn('每万人吸引外商投资额（实际）','z72');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[6].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('企业税收负担','z73');
+			}else if(remenOnf==1){
+				getRMDataFn('企业税收负担','z73');
+			}else{
+				getFRMDataFn('企业税收负担','z73');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[7].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每百人公共图书馆藏书拥有量','z37');
+			}else if(remenOnf==1){
+				getRMDataFn('每百人公共图书馆藏书拥有量','z37');
+			}else{
+				getFRMDataFn('每百人公共图书馆藏书拥有量','z37');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[8].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每百名学生拥有专任教师人数','z75');
+			}else if(remenOnf==1){
+				getRMDataFn('每百名学生拥有专任教师人数','z75');
+			}else{
+				getFRMDataFn('每百名学生拥有专任教师人数','z75');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[9].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每千人口拥有医院床位数','z76');
+			}else if(remenOnf==1){
+				getRMDataFn('每千人口拥有医院床位数','z76');
+			}else{
+				getFRMDataFn('每千人口拥有医院床位数','z76');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[10].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('城市人均公园绿地面积','z77');
+			}else if(remenOnf==1){
+				getRMDataFn('城市人均公园绿地面积','z77');
+			}else{
+				getFRMDataFn('城市人均公园绿地面积','z77');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[11].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人拥有公共汽车数','z39');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人拥有公共汽车数','z39');
+			}else{
+				getFRMDataFn('每万人拥有公共汽车数','z39');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[12].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人移动电话用户数','z79');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人移动电话用户数','z79');
+			}else{
+				getFRMDataFn('每万人移动电话用户数','z79');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[13].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人互联网宽带接入用户数','z80');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人互联网宽带接入用户数','z80');
+			}else{
+				getFRMDataFn('每万人互联网宽带接入用户数','z80');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[14].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('新三板上市企业个数','z1');
+			}else if(remenOnf==1){
+				getRMDataFn('新三板上市企业个数','z1');
+			}else{
+				getFRMDataFn('新三板上市企业个数','z1');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[15].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('年末金融机构贷款余额增长率','z82');
+			}else if(remenOnf==1){
+				getRMDataFn('年末金融机构贷款余额增长率','z82');
+			}else{
+				getFRMDataFn('年末金融机构贷款余额增长率','z82');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[16].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('创业板上市企业个数','z9');
+			}else if(remenOnf==1){
+				getRMDataFn('创业板上市企业个数','z9');
+			}else{
+				getFRMDataFn('创业板上市企业个数','z9');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[17].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人论文产出数','z84');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人论文产出数','z84');
+			}else{
+				getFRMDataFn('每万人论文产出数','z84');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[18].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('每万人专利授权量','z85');
+			}else if(remenOnf==1){
+				getRMDataFn('每万人专利授权量','z85');
+			}else{
+				getFRMDataFn('每万人专利授权量','z85');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[19].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('城镇居民人均可支配收入','z86');
+			}else if(remenOnf==1){
+				getRMDataFn('城镇居民人均可支配收入','z86');
+			}else{
+				getFRMDataFn('城镇居民人均可支配收入','z86');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[20].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('地均GDP','z87');
+			}else if(remenOnf==1){
+				getRMDataFn('地均GDP','z87');
+			}else{
+				getFRMDataFn('地均GDP','z87');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[21].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('第二产业劳动生产率','z88');
+			}else if(remenOnf==1){
+				getRMDataFn('第二产业劳动生产率','z88');
+			}else{
+				getFRMDataFn('第二产业劳动生产率','z88');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[22].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('第三产业劳动生产率','z89');
+			}else if(remenOnf==1){
+				getRMDataFn('第三产业劳动生产率','z89');
+			}else{
+				getFRMDataFn('第三产业劳动生产率','z89');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[23].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('全市第三产业占GDP比重','z22');
+			}else if(remenOnf==1){
+				getRMDataFn('全市第三产业占GDP比重','z22');
+			}else{
+				getFRMDataFn('全市第三产业占GDP比重','z22');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[24].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('高科技产品进出口总额占地区生产总值的比例','z12');
+			}else if(remenOnf==1){
+				getRMDataFn('高科技产品进出口总额占地区生产总值的比例','z12');
+			}else{
+				getFRMDataFn('高科技产品进出口总额占地区生产总值的比例','z12');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[25].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('万元地区生产总值水耗','z92');
+			}else if(remenOnf==1){
+				getRMDataFn('万元地区生产总值水耗','z92');
+			}else{
+				getFRMDataFn('万元地区生产总值水耗','z92');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[26].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('城市污水处理率','z94');
+			}else if(remenOnf==1){
+				getRMDataFn('城市污水处理率','z94');
+			}else{
+				getFRMDataFn('城市污水处理率','z94');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[27].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('生活垃圾无害化处理率','z95');
+			}else if(remenOnf==1){
+				getRMDataFn('生活垃圾无害化处理率','z95');
+			}else{
+				getFRMDataFn('生活垃圾无害化处理率','z95');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[28].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('城市空气质量等级','z4');
+			}else if(remenOnf==1){
+				getRMDataFn('城市空气质量等级','z4');
+			}else{
+				getFRMDataFn('城市空气质量等级','z4');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[29].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('全市在校本科及以上学生数占全省本科及以上学生数比重','z97');
+			}else if(remenOnf==1){
+				getRMDataFn('全市在校本科及以上学生数占全省本科及以上学生数比重','z97');
+			}else{
+				getFRMDataFn('全市在校本科及以上学生数占全省本科及以上学生数比重','z97');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[30].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('全市科学技术从业人员数占全省科学技术从业人员比重','z98');
+			}else if(remenOnf==1){
+				getRMDataFn('全市科学技术从业人员数占全省科学技术从业人员比重','z98');
+			}else{
+				getFRMDataFn('全市科学技术从业人员数占全省科学技术从业人员比重','z98');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[31].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('国家技术转移示范机构数','z2');
+			}else if(remenOnf==1){
+				getRMDataFn('国家技术转移示范机构数','z2');
+			}else{
+				getFRMDataFn('国家技术转移示范机构数','z2');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[32].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('ESI学科进入全球前1%个数','z8');
+			}else if(remenOnf==1){
+				getRMDataFn('ESI学科进入全球前1%个数','z8');
+			}else{
+				getFRMDataFn('ESI学科进入全球前1%个数','z8');
+			}
+			headera.innerHTML = this.innerHTML;
+			data1 = [];
+		}
+		header_three_tclis[33].onclick = function(){
+			if(remenOnf==0){
+				getDataFn('财富中国500强企业个数','z5');
+			}else if(remenOnf==1){
+				getRMDataFn('财富中国500强企业个数','z5');
+			}else{
+				getFRMDataFn('财富中国500强企业个数','z5');
+			}
+			headera.innerHTML = this.innerHTML
+			data1 = [];
+		}
+		
+		//列表收缩
+		var list = document.getElementById('list');
+		var listss = document.getElementById('listss');
+		var listOnf = true;
+		listss.onclick =function(){
+			if(listOnf){
+				list.style.width = '8px';
+				listss.style.transform = 'rotate(0)';
+			}else{
+				list.style.width = '100px';
+				listss.style.transform = 'rotate(180deg)';
+			}
+			listOnf = !listOnf;
+		}
+		//从后端获取数据
+		
+		var valnew = '创新绩效';
+		var valnew2 = 'jixiao';
+		function getDataFn(value,value2){
+			 $.ajax({
+//				 async: true,//默认是异步
+				 type: "GET",
+				 dataType: 'jsonp',
+				 jsonp: 'callback',
+				 jsonpcallback: 'callbackfunction',
+				 url: "http://zhonguancun.com/getranking.php?id="+value+"&disall=1&jsoncallback=?",
+				 success: function(json) {
+//				 	var val = json[0][value2]/800;
+//				 	console.log(json)
+					 for(var i=0;i<json.length;i++){
+					 	delete json[i].cid;
+					 	delete json[i].rank;
+					 	json[i].name = json[i].city;
+					 	delete json[i].city;
+					 	json[i].value = json[i][value2];
+					 	delete json[i][value2];
+					 	json[i].value = parseFloat(json[i].value);
+					 	data1.push(json[i]);
+					 }
+					data = data1;
+					valnew = value;
+					valnew2 = value2;
+					loadingFn();
+					tab();
+				 },
+				 error:function(data){
+					alert("error");
+				}
+			 });
+		}
+		function getRMDataFn(value,value2){
+			 $.ajax({
+//				 async: true,//默认是异步
+				 type: "GET",
+				 dataType: 'jsonp',
+				 jsonp: 'callback',
+				 jsonpcallback: 'callbackfunction',
+				 url: "http://zhonguancun.com/getranking.php?id="+value+"&jsoncallback=?",
+				 success: function(json) {
+//				 	var val = json[0][value2]/800;
+				 	console.log(json)
+					 for(var i=0;i<json.length;i++){
+					 	delete json[i].cid;
+					 	delete json[i].rank;
+					 	json[i].name = json[i].city;
+					 	delete json[i].city;
+					 	json[i].value = json[i][value2];
+					 	delete json[i][value2];
+					 	json[i].value = parseFloat(json[i].value);
+					 	data1.push(json[i]);
+					 }
+					data2 = data1;
+					data = data1;
+					valnew = value;
+					valnew2 = value2;
+					loadingFn()
+					tab();
+				 },
+				 error:function(data){
+					alert("error");
+				}
+			 });
+		}
+		function getFRMDataFn(value,value2){
+			 $.ajax({
+//				 async: true,//默认是异步
+				 type: "GET",
+				 dataType: 'jsonp',
+				 jsonp: 'callback',
+				 jsonpcallback: 'callbackfunction',
+				 url: "http://zhonguancun.com/getranking.php?id="+value+"&disall=1&jsoncallback=?",
+				 success: function(json) {
+//				 	var val = json[0][value2]/800;
+//				 	console.log(json)
+					 for(var i=0;i<json.length;i++){
+					 	delete json[i].cid;
+					 	delete json[i].rank;
+					 	json[i].name = json[i].city;
+					 	delete json[i].city;
+					 	json[i].value = json[i][value2];
+					 	delete json[i][value2];
+					 	json[i].value = parseFloat(json[i].value);
+					 	data1.push(json[i]);
+					 }
+					var dataF = [];
+					for(var i=0;i<data1.length;i++){
+						for(var j=0;j<data2.length;j++){
+							if(data1[i].name==data2[j].name){
+								break;
+							}else if(j==data2.length-1){
+								dataF.push(data1[i]);
+							}
+						}
+					}
+					data = dataF;
+					valnew = value;
+					valnew2 = value2;
+					loadingFn();
+					tab();
+				 },
+				 error:function(data){
+					alert("error");
+				}
+			 });
+		}
+		function changeDataFn(value,value2){
+			 $.ajax({
+//				 async: true,//默认是异步
+				 type: "GET",
+				 dataType: 'jsonp',
+				 jsonp: 'callback',
+				 jsonpcallback: 'callbackfunction',
+				 url: "http://zhonguancun.com/getranking.php?id="+value+"&disall=1&jsoncallback=?",
+				 success: function(json) {
+//				 	var val = json[0][value2]/800;
+				 	console.log(json)
+					 for(var i=0;i<json.length;i++){
+					 	delete json[i].cid;
+					 	delete json[i].rank;
+					 	json[i].name = json[i].city;
+					 	delete json[i].city;
+					 	json[i].value = json[i][value2];
+					 	delete json[i][value2];
+					 	json[i].value = parseFloat(json[i].value);
+					 	data1.push(json[i]);
+					 }
+					data = data1;
+					tab();
+				 },
+				 error:function(data){
+					alert("error");
+				}
+			 });
+		}
+		
+		function changeRMDataFn(value,value2){
+			 $.ajax({
+//				 async: true,//默认是异步
+				 type: "GET",
+				 dataType: 'jsonp',
+				 jsonp: 'callback',
+				 jsonpcallback: 'callbackfunction',
+				 url: "http://zhonguancun.com/getranking.php?id="+value+"&jsoncallback=?",
+				 success: function(json) {
+//				 	var val = json[0][value2]/800;
+//				 	console.log(json)
+					 for(var i=0;i<json.length;i++){
+					 	delete json[i].cid;
+					 	delete json[i].rank;
+					 	json[i].name = json[i].city;
+					 	delete json[i].city;
+					 	json[i].value = json[i][value2];
+					 	delete json[i][value2];
+					 	json[i].value = parseFloat(json[i].value);
+					 	data1.push(json[i]);
+					 }
+					data2 = data1;
+					data = data1;
+//					loadingFn()
+					tab();
+				 },
+				 error:function(data){
+					alert("error");
+				}
+			 });
+		}
+		//初始数据
+				var data = [
+			{name	:	'北京',value	:	0.5874050927	},
+			{name	:	'深圳',value	:	0.5867601151	},
+			{name	:	'上海',value	:	0.4993294226	},
+			{name	:	'广州',value	:	0.4642518999	},
+			{name	:	'东莞',value	:	0.45187387	},
+			{name	:	'天津',value	:	0.4161299444	},
+			{name	:	'武汉',value	:	0.4048365474	},
+			{name	:	'杭州',value	:	0.3907659722	},
+			{name	:	'南京',value	:	0.389697052	},
+			{name	:	'海口',value	:	0.3756527262	},
+			{name	:	'苏州',value	:	0.3837568459	},
+			{name	:	'厦门',value	:	0.3776376305	},
+			{name	:	'珠海',value	:	0.3756378004	},
+			{name	:	'长沙',value	:	0.3671742495	},
+			{name	:	'西安',value	:	0.3644052151	},
+			{name	:	'呼和浩特',value	:	0.3615283	},
+			{name	:	'成都',value	:	0.3581634117	},
+			{name	:	'中山',value	:	0.3564565876	},
+			{name	:	'乌鲁木齐',value	:	0.3509003	},
+			{name	:	'青岛',value	:	0.3471896629	},
+			{name	:	'太原',value	:	0.3402976874	},
+			{name	:	'沈阳',value	:	0.3393880644	},
+			{name	:	'大连',value	:	0.3389989854	},
+			{name	:	'昆明',value	:	0.3367896445	},
+			{name	:	'长春',value	:	0.3364049889	},
+			{name	:	'鄂尔多斯',value	:	0.3361489	},
+			{name	:	'无锡',value	:	0.3355139174	},
+			{name	:	'贵阳',value	:	0.3330393474	},
+			{name	:	'济南',value	:	0.3293241514	},
+			{name	:	'佛山',value	:	0.3242304726	},
+			{name	:	'哈尔滨',value	:	0.3242034249	},
+			{name	:	'常州',value	:	0.3241602946	},
+			{name	:	'福州',value	:	0.3203202124	},
+			{name	:	'合肥',value	:	0.3190651185	},
+			{name	:	'三亚',value	:	0.317730076	},
+			{name	:	'兰州',value	:	0.3176874826	},
+			{name	:	'南昌',value	:	0.3165286535	},
+			{name	:	'大庆',value	:	0.3153935056	},
+			{name	:	'银川',value	:	0.3148614093	},
+			{name	:	'郑州',value	:	0.3135238782	},
+			{name	:	'克拉玛依',value	:	0.3099621	},
+			{name	:	'包头',value	:	0.3093547962	},
+			{name	:	'威海',value	:	0.308218314	},
+			{name	:	'镇江',value	:	0.3058369016	},
+			{name	:	'西宁',value	:	0.3054662298	},
+			{name	:	'重庆',value	:	0.3051625852	},
+			{name	:	'惠州',value	:	0.2993585531	},
+			{name	:	'烟台',value	:	0.2984608432	},
+			{name	:	'嘉兴',value	:	0.2934370986	},
+			{name	:	'宁波',value	:	0.2924981859	},
+			{name	:	'东营',value	:	0.2922206224	},
+			{name	:	'舟山',value	:	0.2842524362	},
+			{name	:	'淄博',value	:	0.2824185309	},
+			{name	:	'南宁',value	:	0.2808512464	},
+			{name	:	'石家庄',value	:	0.2758929079	},
+			{name	:	'扬州',value	:	0.275880714	},
+			{name	:	'温州',value	:	0.2751568507	},
+			{name	:	'芜湖',value	:	0.2748785009	},
+			{name	:	'铜陵',value	:	0.2744225728	},
+			{name	:	'金华',value	:	0.274339657	},
+			{name	:	'潍坊',value	:	0.2740649135	},
+			{name	:	'南通',value	:	0.2736844475	},
+			{name	:	'乌兰察布',value	:	0.2722693	},
+			{name	:	'绍兴',value	:	0.2721676127	},
+			{name	:	'泉州',value	:	0.2703647455	},
+			{name	:	'莆田',value	:	0.269375833	},
+			{name	:	'洛阳',value	:	0.2687387467	},
+			{name	:	'吉林',value	:	0.2661140811	},
+			{name	:	'秦皇岛',value	:	0.2657985312	},
+			{name	:	'辽源',value	:	0.264565463	},
+			{name	:	'新余',value	:	0.2632617879	},
+			{name	:	'宝鸡',value	:	0.2628399965	},
+			{name	:	'江门',value	:	0.2616601747	},
+			{name	:	'湖州',value	:	0.2612830506	},
+			{name	:	'绵阳',value	:	0.2606320471	},
+			{name	:	'泰安',value	:	0.2597010437	},
+			{name	:	'白城',value	:	0.2594618485	},
+			{name	:	'松原',value	:	0.2592542088	},
+			{name	:	'台州',value	:	0.2588167872	},
+			{name	:	'呼伦贝尔',value	:	0.2578163	},
+			{name	:	'乌海',value	:	0.2574526525	},
+			{name	:	'株洲',value	:	0.2574458856	},
+			{name	:	'丽水',value	:	0.2571067525	},
+			{name	:	'鄂州',value	:	0.256660351	},
+			{name	:	'沧州',value	:	0.2562611408	},
+			{name	:	'唐山',value	:	0.2560591706	},
+			{name	:	'酒泉',value	:	0.2558948333	},
+			{name	:	'武威',value	:	0.2539112738	},
+			{name	:	'日照',value	:	0.2533065591	},
+			{name	:	'盘锦',value	:	0.2531012638	},
+			{name	:	'常德',value	:	0.2528243412	},
+			{name	:	'安康',value	:	0.2527227213	},
+			{name	:	'茂名',value	:	0.2525206817	},
+			{name	:	'龙岩',value	:	0.2524187956	},
+			{name	:	'三明',value	:	0.2521743741	},
+			{name	:	'遵义',value	:	0.2509892239	},
+			{name	:	'晋中',value	:	0.2502921693	},
+			{name	:	'营口',value	:	0.2502114768	},
+			{name	:	'泰州',value	:	0.2500598679	},
+			{name	:	'北海',value	:	0.2500264813	},
+			{name	:	'湘潭',value	:	0.2499924125	},
+			{name	:	'马鞍山',value	:	0.2487365269	},
+			{name	:	'巴彦淖尔',value	:	0.2486854	},
+			{name	:	'辽阳',value	:	0.2484836836	},
+			{name	:	'衢州',value	:	0.2476833091	},
+			{name	:	'漳州',value	:	0.2474842447	},
+			{name	:	'张掖',value	:	0.2468864157	},
+			{name	:	'汉中',value	:	0.2457600426	},
+			{name	:	'自贡',value	:	0.2449690413	},
+			{name	:	'运城',value	:	0.244868717	},
+			{name	:	'固原',value	:	0.2448022382	},
+			{name	:	'广安',value	:	0.24477524	},
+			{name	:	'桂林',value	:	0.2445076695	},
+			{name	:	'通辽',value	:	0.2443993431	},
+			{name	:	'佳木斯',value	:	0.2440860324	},
+			{name	:	'淮北',value	:	0.2437870554	},
+			{name	:	'石嘴山',value	:	0.2431647032	},
+			{name	:	'抚顺',value	:	0.2428722844	},
+			{name	:	'湛江',value	:	0.2422774901	},
+			{name	:	'岳阳',value	:	0.2422681915	},
+			{name	:	'莱芜',value	:	0.2421100447	},
+			{name	:	'保定',value	:	0.2416206541	},
+			{name	:	'阳泉',value	:	0.2413494341	},
+			{name	:	'咸阳',value	:	0.2413098154	},
+			{name	:	'汕头',value	:	0.2409982435	},
+			{name	:	'榆林',value	:	0.2407192938	},
+			{name	:	'徐州',value	:	0.240681421	},
+			{name	:	'鞍山',value	:	0.2406252431	},
+			{name	:	'本溪',value	:	0.2403911855	},
+			{name	:	'毕节',value	:	0.2402377559	},
+			{name	:	'大同',value	:	0.2392352957	},
+			{name	:	'滨州',value	:	0.2388993615	},
+			{name	:	'韶关',value	:	0.2388325028	},
+			{name	:	'许昌',value	:	0.2387416479	},
+			{name	:	'廊坊',value	:	0.238177602	},
+			{name	:	'防城港',value	:	0.237778672	},
+			{name	:	'临沂',value	:	0.2373308197	},
+			{name	:	'潮州',value	:	0.2369393294	},
+			{name	:	'邯郸',value	:	0.2369264421	},
+			{name	:	'赤峰',value	:	0.2368850504	},
+			{name	:	'朔州',value	:	0.2366446939	},
+			{name	:	'襄阳',value	:	0.2362917142	},
+			{name	:	'郴州',value	:	0.2357472331	},
+			{name	:	'十堰',value	:	0.2356727361	},
+			{name	:	'三门峡',value	:	0.2355385819	},
+			{name	:	'宜昌',value	:	0.234898468	},
+			{name	:	'锦州',value	:	0.2346861447	},
+			{name	:	'南平',value	:	0.2346603473	},
+			{name	:	'淮安',value	:	0.2342509934	},
+			{name	:	'肇庆',value	:	0.2342434593	},
+			{name	:	'怀化',value	:	0.234006127	},
+			{name	:	'济宁',value	:	0.2338606369	},
+			{name	:	'晋城',value	:	0.2336783039	},
+			{name	:	'萍乡',value	:	0.23327145	},
+			{name	:	'遂宁',value	:	0.2329933594	},
+			{name	:	'阳江',value	:	0.2329405765	},
+			{name	:	'德阳',value	:	0.2329311462	},
+			{name	:	'铜川',value	:	0.2328409939	},
+			{name	:	'来宾',value	:	0.2325644887	},
+			{name	:	'黄山',value	:	0.2323865734	},
+			{name	:	'贺州',value	:	0.2316940326	},
+			{name	:	'绥化',value	:	0.2316916285	},
+			{name	:	'丹东',value	:	0.2316332184	},
+			{name	:	'钦州',value	:	0.2313447861	},
+			{name	:	'四平',value	:	0.2307491054	},
+			{name	:	'蚌埠',value	:	0.2303555771	},
+			{name	:	'云浮',value	:	0.2301759293	},
+			{name	:	'安庆',value	:	0.2300517918	},
+			{name	:	'益阳',value	:	0.229859985	},
+			{name	:	'池州',value	:	0.2296937878	},
+			{name	:	'双鸭山',value	:	0.2295056906	},
+			{name	:	'玉林',value	:	0.2292999773	},
+			{name	:	'淮南',value	:	0.2290349772	},
+			{name	:	'张家界',value	:	0.2289380488	},
+			{name	:	'咸宁',value	:	0.2287548049	},
+			{name	:	'新乡',value	:	0.2285280415	},
+			{name	:	'承德',value	:	0.228514686	},
+			{name	:	'商洛',value	:	0.2283583817	},
+			{name	:	'宁德',value	:	0.2283447707	},
+			{name	:	'荆门',value	:	0.2283335424	},
+			{name	:	'宣城',value	:	0.228305858	},
+			{name	:	'聊城',value	:	0.2282805348	},
+			{name	:	'焦作',value	:	0.2282462688	},
+			{name	:	'天水',value	:	0.2280067136	},
+			{name	:	'随州',value	:	0.2274619506	},
+			{name	:	'嘉峪关',value	:	0.2270914438	},
+			{name	:	'德州',value	:	0.2266070341	},
+			{name	:	'景德镇',value	:	0.2265957105	},
+			{name	:	'中卫',value	:	0.2265376952	},
+			{name	:	'枣庄',value	:	0.2264757659	},
+			{name	:	'内江',value	:	0.2259828071	},
+			{name	:	'广元',value	:	0.2257836726	},
+			{name	:	'盐城',value	:	0.2256974666	},
+			{name	:	'邢台',value	:	0.225693123	},
+			{name	:	'宿迁',value	:	0.2250423693	},
+			{name	:	'普洱',value	:	0.2249139254	},
+			{name	:	'曲靖',value	:	0.2249026035	},
+			{name	:	'九江',value	:	0.2246496673	},
+			{name	:	'白山',value	:	0.2244419119	},
+			{name	:	'亳州',value	:	0.2241754503	},
+			{name	:	'通化',value	:	0.2239866507	},
+			{name	:	'葫芦岛',value	:	0.223741624	},
+			{name	:	'眉山',value	:	0.2232982492	},
+			{name	:	'滁州',value	:	0.2231308122	},
+			{name	:	'濮阳',value	:	0.2230961114	},
+			{name	:	'连云港',value	:	0.2229829272	},
+			{name	:	'贵港',value	:	0.2228045177	},
+			{name	:	'清远',value	:	0.2227786219	},
+			{name	:	'阜新',value	:	0.222423625	},
+			{name	:	'乐山',value	:	0.2223988022	},
+			{name	:	'张家口',value	:	0.2220311932	},
+			{name	:	'吉安',value	:	0.2218085291	},
+			{name	:	'丽江',value	:	0.2217887417	},
+			{name	:	'金昌',value	:	0.2217425675	},
+			{name	:	'梅州',value	:	0.2216421952	},
+			{name	:	'漯河',value	:	0.2208163055	},
+			{name	:	'铁岭',value	:	0.220346794	},
+			{name	:	'信阳',value	:	0.220302748	},
+			{name	:	'黄石',value	:	0.2202301306	},
+			{name	:	'资阳',value	:	0.2201805431	},
+			{name	:	'玉溪',value	:	0.220136446	},
+			{name	:	'宜宾',value	:	0.2197768906	},
+			{name	:	'崇左',value	:	0.2197050002	},
+			{name	:	'南充',value	:	0.2189979444	},
+			{name	:	'长治',value	:	0.2187165697	},
+			{name	:	'朝阳',value	:	0.2185010873	},
+			{name	:	'庆阳',value	:	0.2181703005	},
+			{name	:	'保山',value	:	0.2179387509	},
+			{name	:	'梧州',value	:	0.2179075506	},
+			{name	:	'抚州',value	:	0.2174514307	},
+			{name	:	'宿州',value	:	0.2172431543	},
+			{name	:	'六安',value	:	0.217180813	},
+			{name	:	'伊春',value	:	0.2167246855	},
+			{name	:	'临汾',value	:	0.2164377038	},
+			{name	:	'定西',value	:	0.2163054658	},
+			{name	:	'鹰潭',value	:	0.2157581659	},
+			{name	:	'攀枝花',value	:	0.215427007	},
+			{name	:	'衡阳',value	:	0.2151862727	},
+			{name	:	'汕尾',value	:	0.214544579	},
+			{name	:	'渭南',value	:	0.2144183319	},
+			{name	:	'南阳',value	:	0.2143247886	},
+			{name	:	'齐齐哈尔',value	:	0.2141224	},
+			{name	:	'柳州',value	:	0.2138173406	},
+			{name	:	'巴中',value	:	0.2137091852	},
+			{name	:	'鹤壁',value	:	0.2129690201	},
+			{name	:	'黄冈',value	:	0.211658428	},
+			{name	:	'孝感',value	:	0.2115233326	},
+			{name	:	'雅安',value	:	0.2112155564	},
+			{name	:	'衡水',value	:	0.2112048404	},
+			{name	:	'上饶',value	:	0.2100040639	},
+			{name	:	'牡丹江',value	:	0.2099598776	},
+			{name	:	'宜春',value	:	0.2099223038	},
+			{name	:	'延安',value	:	0.2098525686	},
+			{name	:	'鸡西',value	:	0.2095734238	},
+			{name	:	'百色',value	:	0.2094781338	},
+			{name	:	'达州',value	:	0.2087058093	},
+			{name	:	'河池',value	:	0.2082536718	},
+			{name	:	'安顺',value	:	0.2072875664	},
+			{name	:	'菏泽',value	:	0.207124795	},
+			{name	:	'河源',value	:	0.2069896629	},
+			{name	:	'永州',value	:	0.2066856135	},
+			{name	:	'六盘水',value	:	0.2065172307	},
+			{name	:	'揭阳',value	:	0.2063993735	},
+			{name	:	'驻马店',value	:	0.2061902641	},
+			{name	:	'忻州',value	:	0.2060063252	},
+			{name	:	'商丘',value	:	0.2059887007	},
+			{name	:	'安阳',value	:	0.2055715366	},
+			{name	:	'娄底',value	:	0.2049762393	},
+			{name	:	'平顶山',value	:	0.2045845602	},
+			{name	:	'临沧',value	:	0.2040920629	},
+			{name	:	'吕梁',value	:	0.2037271705	},
+			{name	:	'开封',value	:	0.202737987	},
+			{name	:	'七台河',value	:	0.2024027209	},
+			{name	:	'铜仁',value	:	0.2013643128	},
+			{name	:	'吴忠',value	:	0.2011285659	},
+			{name	:	'邵阳',value	:	0.200909855	},
+			{name	:	'阜阳',value	:	0.1998236115	},
+			{name	:	'黑河',value	:	0.1979235308	},
+			{name	:	'泸州',value	:	0.197894261	},
+			{name	:	'赣州',value	:	0.1973549454	},
+			{name	:	'平凉',value	:	0.1973524369	},
+			{name	:	'白银',value	:	0.1947913626	},
+			{name	:	'荆州',value	:	0.1927664948	},
+			{name	:	'周口',value	:	0.1923936936	},
+			{name	:	'鹤岗',value	:	0.1791286516	},
+			{name	:	'昭通',value	:	0.1742634916	},
+			{name	:	'陇南',value	:	0.17250695	}
+		];
+
+		
+		
+		//主体
+		tab();
+		window.addEventListener( 'resize', tab, false );
+		//左侧列表区域
+		function tab(){
+			
+			var list = document.getElementById('list');
+			var list2 = document.getElementById('list2');
+			list2.innerHTML = '';
+			var h = window.innerHeight;
+			var w = window.innerWidth;
+			header.style.backgroundSize = h*0.04+'px '+h*0.04+'px';
+			var main = document.getElementById('main');
+			main.style.height = h + 'px';
+			main.style.width = w + 'px';
+			//左侧列表
+			var arr1 = [];
+			arr1 = data.sort(function(a,b){
+				return b.value-a.value;
+			})
+//			console.log(arr1)
+			var arrvalue = [];
+			for(var i=0;i<data.length;i++){
+				arrvalue.push(parseFloat(arr1[i].value));
+			}
+			var avl = 0;
+			var sum = 0;
+			arrvalue = arrvalue.reverse();
+//			console.log(arrvalue)
+			
+			for(var i=0;i<arrvalue.length;i++){
+				sum+=arrvalue[i];
+			}
+			avl = sum/arrvalue.length-1;
+			
+			var arrname= [];
+			for(var i=0;i<data.length;i++){
+				arrname.push(arr1[i].name);
+			}
+			arrname = arrname.reverse();
+			for(var i=0;i<arr1.length;i++){
+				var city = document.createElement( 'div' );
+				city.className = 'abc';
+				city.innerHTML = (i+1)+':'+arr1[i].name;
+				list2.appendChild( city );
+			}
+			//改变滚动条
+			$("#list2").ready(
+			  function() { 
+			    $("#list2").niceScroll({
+			    	cursorcolor:"orange",
+			    	preventmultitouchscrolling: true
+			    });
+			  }
+			);
+			//列表点击弹窗
+			var tanchu = document.getElementById('tanchu');
+			var divs = list2.getElementsByTagName('div');
+			for(var i=0;i<divs.length;i++){
+				divs[i].index = i;
+				divs[i].onmouseover = function(){
+					option.series[2].data = convertData(data.sort(function (a, b) {
+		                return b.value - a.value;
+		            }).slice(this.index,this.index+1));
+					myChart.setOption(option);
+				}
+				divs[i].onmouseleave = function(){
+					option.series[2].data = '';
+					myChart.setOption(option);
+				}
+				divs[i].onclick = function(){
+					righttm.style.right = 0;
+					lefttm.style.display = 'block';
+					righttm2.style.right = 0;
+					righttm3.style.right = 0;
+//					option.geo.layoutCenter = [ '30%' , '53%'];
+					option2.dataZoom[0].start = 90-this.index*0.35
+			        option2.dataZoom[0].end = 100-this.index*0.35;
+					
+					myChart.setOption(option);
+					myChart2.setOption(option2);
+				}
+			}
+			
+			
+			//点击上面 下面文字清空 并恢复初始页面
+			lefttm.onclick = function(){
+				righttm.style.right = '-50%';
+				lefttm.style.display = 'none';
+				righttm2.style.right = '-50%';
+				righttm3.style.right = '-50%';
+//				option.geo.layoutCenter = [ '50%' , '53%'];
+				option.series[2].data = '';
+			}
+		
+			
+			
+			header_all.onclick = function(){
+				location=location;
+			}
+			
+			
+			var convertData = function (data) {
+			    var res = [];
+			    for (var i = 0; i < data.length; i++) {
+			        var geoCoord = geoCoordMap[data[i].name];
+			        if (geoCoord) {
+			            res.push({
+			                name: data[i].name,
+			                value: geoCoord.concat(data[i].value)
+			            });
+			        }
+			    }
+			    return res;
+			};
+			var convertData2 = function (data) {
+			    var res = [];
+			    for (var i = 0; i < data.length; i++) {
+			        var geoCoord = geoCoordMap2[data[i].name];
+			        if (geoCoord) {
+			            res.push({
+			                name: data[i].name,
+			                value: geoCoord.concat(data[i].value)
+			            });
+			        }
+			    }
+			    return res;
+			};
+			//地图
+			
+			var option = {
+			    backgroundColor: '#eeeee7',
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: '{b}', //提示标签格式
+	                backgroundColor:"#ff7f50",//提示标签背景颜色
+	                textStyle:{color:"#cccccc"} //提示标签字体颜色
+			    },
+			    visualMap: {
+			        min: parseFloat(arrvalue[arrvalue.length-1]),
+			        max: parseFloat(arrvalue[0]),
+			        calculable: true,
+			        left: 'left',
+	   				top: 'bottom',
+			        inRange: {
+			            color: ['green', '#eac736', '#d94e5d']
+			        },
+			        text: ['高','低'],
+			        textStyle: {
+			            color: '#000',
+			            fontSize: 10,
+			            fontWeight:900,
+			            fontFamily:'微软雅黑'
+			        }
+			    },
+			    //百度地图
+			    bmap: {
+			        center: [104.114129, 37.550339],
+			        zoom: 6,
+			        roam: true,
+			    },
+			    tooltip: {
+			    	show:false,
+			    },
+			    series : [
+			        {
+			            name: '城市创新指数',
+			            type: 'scatter',
+			            coordinateSystem: 'bmap',
+			            selectedMode : 'multiple',
+			            data: convertData(data),
+			            symbolSize: function (val) {
+			                return val[2] / arrvalue[arrvalue.length-1]*30;
+			            },
+			            label: {
+			                normal: {
+			                    formatter: '{b}',
+			                    position: 'right',
+			                    show: false,
+			                },
+			                ///对应的鼠标悬浮效果
+			                emphasis: {
+			                    show: true,
+			                    textStyle:{
+						            color: '#000',
+						            fontSize: 14,
+						            fontWeight:900,
+						            fontFamily:'微软雅黑'
+			                    }
+			                }
+			            },
+			            itemStyle: {
+			                normal: {
+			                	borderWidth: .5,//区域边框宽度
+	                            borderColor: '#009fe8',//区域边框颜色
+	//	                            areaColor:"#ffefd5",//区域颜色
+			                    color: '#ddb926'
+			                },
+			                emphasis: {
+	                            borderWidth: 20,
+	                            borderColor: 'orange',
+								color: 'orange'
+	                        }
+			            }
+			        },
+			        {
+			            name: 'Top 5',
+			            type: 'effectScatter',
+			            coordinateSystem: 'bmap',
+			            data: convertData(data.sort(function (a, b) {
+			                return b.value - a.value;
+			            }).slice(0, 5)),
+			            symbolSize: function (val) {
+			                return val[2] / arrvalue[arrvalue.length-1]*40;
+			            },
+			            showEffectOn: 'render',
+			            rippleEffect: {
+			                brushType: 'stroke'
+			            },
+			            hoverAnimation: true,
+			            label: {
+			                normal: {
+			                    formatter: '{b}',
+			                    position: 'right',
+			                    show: true
+			                }
+			            },
+			            itemStyle: {
+			                normal: {
+			                    color: '#f4e925',
+			                    shadowBlur: 10,
+			                    shadowColor: '#333',
+			                }
+			            },
+			            zlevel: 1
+			        },
+			        {
+			            name: 'aa',
+			            type: 'effectScatter',
+			            coordinateSystem: 'bmap',
+			            data: '',
+			            symbolSize: function (val) {
+			                return val[2] / arrvalue[arrvalue.length-1]*70;
+			            },
+			            label: {
+			                normal: {
+			                    formatter: '{b}',
+			                    position: 'right',
+			                    show: true,
+			                    textStyle:{
+						            color: '#000',
+						            fontSize: 14,
+						            fontWeight:900,
+						            fontFamily:'微软雅黑'
+			                    }
+			                }
+			            },
+			            itemStyle: {
+			                normal: {
+			                    color: '#f4e925',
+			                    shadowBlur: 10,
+			                    shadowColor: '#333'
+			                }
+			            },
+			            zlevel: 5
+			        },
+			    ]
+			};
+
+			var myChart = echarts.init(document.getElementById('main'));
+			myChart.setOption(option);
+			// 第二个参数可以指定前面引入的主题
+	//			var myChart = echarts.init(document.getElementById('main'),'vintage');
+	//			myChart.setOption(option);
+			//图表
+			var option2 = {
+				title: {
+			        text: '',
+			        textStyle:{
+			            color: '#000',
+			            fontSize: 20,
+			            fontWeight:900,
+			            fontFamily:'微软雅黑'
+                    }
+			    },
+	            tooltip : {
+		            trigger: 'axis',
+		            axisPointer: {
+		                type: 'shadow',
+		                label: {
+		                    show: true
+		                }
+		            }
+		        },
+		        toolbox: {
+		            show : true,
+		            feature : {
+		                mark : {show: true},
+		                dataView : {show: true, readOnly: false},
+		                magicType: {show: true, type: ['line', 'bar']},
+		                restore : {show: true},
+		                saveAsImage : {show: true}
+		            }
+		        },
+		        calculable : true,
+		        grid: {
+		            top: '12%',
+		            left: '1%',
+		            right: '10%',
+		            containLabel: true
+		        },
+	            legend: {
+	                data:['value']
+	            },
+	            xAxis: {
+	   				data: arrname,
+	   				type: 'category',
+	   				axisLabel:{
+//	   					inside: true,
+			         	interval:0,
+			         	margin: 30,
+			         	rotate:40,
+			         	textStyle:{
+			              	color:'#000',
+			              	align: 'center'
+			         	},
+			      	},
+	            },
+	            yAxis: {
+	            	type: 'value',
+	    			min: 'dataMin',
+			        max: 'dataMax',
+			        splitLine: {
+			            show: true
+			        }
+	            },
+	            dataZoom: [
+					{
+			            type: 'slider',
+			            show: true,
+			            xAxisIndex: [0],
+			            start: 90,
+			            end: 100
+			        },
+		            {
+			            type: 'slider',
+			            show: true,
+			            yAxisIndex: [0],
+			            left: '93%',
+			            start: 0,
+			            end: 100
+			        },
+		            {
+		                show: true,
+		                start: 90,
+		                end: 100
+		            },
+		            {
+		                type: 'inside',
+		                start: 94,
+		                end: 100
+		            }
+		        ],
+	            series: [{
+	                name: 'value',
+	                type: 'bar',
+	                itemStyle: {
+		                normal: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 0, 1,
+		                        [
+		                            {offset: 0, color: '#005faf'},
+		                            {offset: 0.5, color: '#005faf'},
+		                            {offset: 1, color: '#005faf'}
+		                        ]
+		                    )
+		                },
+//		                emphasis: {
+//		                    color: new echarts.graphic.LinearGradient(
+//		                        0, 0, 0, 1,
+//		                        [
+//		                            {offset: 0, color: '#2378f7'},
+//		                            {offset: 0.7, color: '#2378f7'},
+//		                            {offset: 1, color: '#83bff6'}
+//		                        ]
+//		                    )
+//		                }
+		            },
+	                data: arrvalue,
+	                zlevel: 5
+	            }]
+	    };
+	    	option2.title.text = headera.innerHTML;
+	    	var myChart2 = echarts.init(document.getElementById('righttm'));
+	    	myChart2.setOption(option2);
+	    	//地图点击 放大地图
+	    	myChart.on('click', function (params) {
+	    		for(var k in geoCoordMap){
+	           		if(k==params.name){
+	           			righttm.style.right = 0;
+						lefttm.style.display = 'block';
+						righttm2.style.right = 0;
+						righttm3.style.right = 0;
+						option2.dataZoom[0].start = 90-(params.dataIndex)*0.35
+				        option2.dataZoom[0].end = 100-(params.dataIndex)*0.35;
+						myChart2.setOption(option2);
+	           		}
+	           }
+	    	})
+	    	//鼠标移过 显示当前城市
+	    	myChart.on('mouseover', function (params) {
+	    		TC_all.style.display = 'block';
+	    		TC_all.index = params.dataIndex;
+	    		TC_all.style.left = zb.x + 'px';
+	    		TC_all.style.top = zb.y + 'px';
+	    		TC_city.innerHTML = params.name;
+	    		TC_value.innerHTML = Math.round(params.value[2]*100)/100;
+	    		TC_mingci.innerHTML = '名次: '+(params.dataIndex+1);
+	    	})
+			//鼠标移出 大清洗
+			myChart.on('mouseout', function (params) {
+				TC_all.style.display = 'none';
+	    	})
+			
+			//右侧柱状图鼠标点击 变大
+			myChart2.on('click', function (params) {
+			    option.series[2].data = convertData(data.sort(function (a, b) {
+	                return a.value - b.value;
+	            }).slice(params.dataIndex,params.dataIndex+1));
+	            
+	            option2.dataZoom[0].start = (params.dataIndex - 5)/(data.length - 1)*100;
+	            option2.dataZoom[0].end = (params.dataIndex + 5)/(data.length - 1)*100;
+	           	for(var k in geoCoordMap){
+	           		if(k==params.name){
+	           			option.bmap.center = geoCoordMap[k];
+	           			option.bmap.zoom = 6;
+	           		}
+	           	}
+	            myChart.setOption(option);
+	            myChart2.setOption(option2);
+			})
+		}
+		
+		
+		document.onmousemove = function(ev){
+			ev = ev || event;
+			zb.x = ev.clientX;
+			zb.y = ev.clientY;
+		}
+		</script>
+	</body>
+</html>

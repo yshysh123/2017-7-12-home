@@ -1,0 +1,370 @@
+body,h3,p,ul,li{
+	margin: 0;
+	padding: 0;
+}
+ul,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+body{
+	overflow: hidden;
+	font-family: "微软雅黑";
+}
+
+/*loading部分*/
+#loading{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 50%;
+	top: 45%;
+	display: none;
+	z-index: 100000;
+}
+#loading span{
+	line-height: 100px;
+	position: absolute;
+	top: -20px;
+	left:70px;
+	color:#999;
+	font-weight: 900;
+	font-family: "微软雅黑";
+	font-size: 24px;
+	text-align: center;
+}
+#loading .border{
+	width: 50px;
+	height: 50px;
+	border: 5px solid #999;
+	border-radius: 50%;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	-webkit-animation: loadingBorderAni 1s ease-in-out infinite;
+	animation: loadingBorderAni 1s ease-in-out infinite;
+}
+#loading .circle{
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: #999;
+	margin: 15px;
+	transform: scale(.01);
+	-webkit-animation: loadingCircleAni 1s ease-in-out infinite;
+	animation: loadingCircleAni 1s ease-in-out infinite;
+}
+@-webkit-keyframes loadingBorderAni{
+	100%{
+		-webkit-transform: rotateZ(360deg);
+		transform: rotateZ(360deg);
+	}
+}
+@keyframes loadingBorderAni{
+	100%{
+		-webkit-transform: rotateZ(360deg);
+		transform: rotateZ(360deg);
+	}
+}
+@-webkit-keyframes loadingCircleAni{
+	50%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	100%{
+		-webkit-transform: scale(.01);
+		transform: scale(.01);
+	}
+}
+@keyframes loadingCircleAni{
+	50%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	100%{
+		-webkit-transform: scale(.01);
+		transform: scale(.01);
+	}
+}
+/*圆形弹窗*/
+#TC{
+    height:100px;
+    width:100px;
+    border-radius:50%;
+    text-align:center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 25px;
+    z-index: 100000;
+    background: #000;
+    opacity: 0.7;
+    display: none;
+}
+#TC_city{
+	color: #fff;
+    font-size: 20;
+    line-height: 20px;
+    font-weight:900;
+    font-family:'微软雅黑';
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+#TC_mingci{
+	color: #fff;
+    font-size: 20;
+    line-height: 20px;
+    font-weight:900;
+    font-family:'微软雅黑';
+    margin-bottom: 10px;
+}
+#TC_value{
+	color: #fff;
+    font-size: 20;
+    line-height: 20px;
+    font-weight:900;
+    font-family:'微软雅黑';
+}
+/*列表*/
+#list{
+	position: absolute;
+	left: 3%;
+	top: 7.5%;
+	height: 65%;
+	width: 100px;
+	z-index: 100;
+	overflow: hidden;
+	background: #005faf;
+	opacity: 0.8;
+	
+}
+#list2{
+	height: 100%;
+	width: 100%;
+	overflow-y: auto;
+	/*padding-right: 20%;*/
+	background: #005faf;
+}
+#listss{
+	height: 100%;
+	width: 8px;
+	position: absolute;
+	left:0;
+	top: 0;
+	background: #a2a2a2 url(../img/jt.png) no-repeat center center;
+	z-index: 500000;
+	cursor: pointer;
+	transform: rotate(180deg);
+}
+/*#list::-webkit-scrollbar{
+	display: none;
+}*/
+#list .abc{
+	height: 24px;
+	width: 100%;
+	line-height: 24px;
+	text-align: left;
+	color:#fff;
+	font-size: 12px;
+	font-weight: 900;
+	text-align: center;
+	font-family: "微软雅黑";
+	cursor: pointer;
+	float:left;
+}
+#container{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1100;
+	height: 500px;
+	width: 1000px;
+}
+.tcdiv{
+	height: 20px;
+	line-height: 16px;
+	font-weight: 900;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	text-align: center;
+	color:red;
+}
+#remen{
+	position: absolute;
+	right: 5%;
+	top: 15px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 20px;
+	width: 170px;
+	z-index: 600;
+	color: #fff;
+	cursor: pointer;
+	font-weight: 900;
+}
+#header{
+	height: 50px;
+	width: 100%;
+	background: #005faf url(../img/icon.png) no-repeat 5% center;
+	background-size: 40px 40px;
+	z-index: 500;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+#header a{
+	color:#fff;
+	font-size: 24px;
+	line-height: 50px;
+}
+#header a:nth-of-type(1){
+	position: absolute;
+	left: 20%;
+	top: 0;
+}
+#header a:nth-of-type(2){
+	position: absolute;
+	left: 43%;
+	top: 0;
+}
+#header a:nth-of-type(3){
+	position: absolute;
+	left: 55%;
+	top: 0;
+}
+#header a:nth-of-type(4){
+	position: absolute;
+	left: 65%;
+	top: 0;
+}
+#header a:nth-of-type(5){
+	position: absolute;
+	left: 75%;
+	top: 0;
+}
+.clearfix:after{
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	overflow: hidden;
+	display: block;
+	content: ".";
+}
+/*左侧透明层*/
+#lefttm{
+	position: absolute;
+	left: 0;
+	top: 50px;
+	height: 100%;
+	width:100%;
+	background: #000;
+	z-index: 500;
+	opacity: 0.3;
+	/*transition: 1s;*/
+	display: none;
+}
+/*右侧透明层*/
+#righttm{
+	position: absolute;
+	right: -50%;
+	top: 50px;
+	height: 60%;
+	width:50%;
+	background: #fff;
+	z-index: 600;
+	/*opacity: 0.9;*/
+	transition: 0.3s;
+}
+#righttm2{
+	position: absolute;
+	right: -50%;
+	top: 50px;
+	height: 60%;
+	width:50%;
+	background: #ccc;
+	z-index: 500;
+	opacity: 0.6;
+	transition: 0.3s;
+}
+#righttm3{
+	position: absolute;
+	right: -50%;
+	bottom: 0;
+	height: 35%;
+	width:50%;
+	background: #fff;
+	z-index: 500;
+	/*opacity: 0.6;*/
+	transition: 0.3s;
+	font-size: 40px;
+	font-weight: 900;
+	text-align: center;
+	line-height: 300px;
+}
+/*上部弹出层*/
+#header_one_tc{
+	position: absolute;
+	left: 52%;
+	top: 50px;
+	width: 200px;
+	height: 120px;
+	background: #01487c;
+	color:#fff;
+	overflow: hidden;
+	border-radius: 10px;
+	display: none;
+	z-index: 200;
+}
+#header_one_tc div{
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+#header_two_tc{
+	position: absolute;
+	left: 62%;
+	top: 50px;
+	width: 200px;
+	height: 430px;
+	overflow: hidden;
+	background: #01487c;
+	color:#fff;
+	display: none;
+	border-radius: 10px;
+	z-index: 200;
+}
+#header_two_tc div{
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+#header_three_tc{
+	position: absolute;
+	left: 40%;
+	top: 50px;
+	width: 900px;
+	height: 360px;
+	overflow: hidden;
+	border-radius: 10px;
+	background: #01487c;
+	color:#fff;
+	display: none;
+	z-index: 200;
+}
+#header_three_tc ul{
+	float:left;
+	width: 33%;
+	text-align: center;
+}
+#header_three_tc li{
+	line-height: 30px;
+	cursor: pointer;
+	font-size: 14px;
+}
+.BMap_cpyCtrl  
+{  
+    display:none;   
+}  
+.anchorBL{  
+    display:none;   
+}   
