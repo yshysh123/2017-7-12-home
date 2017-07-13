@@ -192,34 +192,6 @@
 		//根据热门城市切换
 		var remen = document.getElementById('remen');
 		var remenOnf = 0;
-		remen.onclick = function(){
-			if(remenOnf==0){
-				this.innerHTML = '副省级以上城市';
-				changeRMDataFn(valnew,valnew2)
-				data1 = [];
-				remenOnf++;
-			}else if(remenOnf==1){
-				this.innerHTML = '非副省级以上城市';
-				var dataF = [];
-				for(var i=0;i<Data.length;i++){
-					for(var j=0;j<data.length;j++){
-						if(Data[i].name==data[j].name){
-							break;
-						}else if(j==data.length-1){
-							dataF.push(Data[i]);
-						}
-					}
-				}
-				data = dataF;
-				tab();
-				remenOnf++;
-			}else{
-				this.innerHTML = '全部城市';
-				changeDataFn(valnew,valnew2)
-				data1 = [];
-				remenOnf=0;
-			}
-		}
 		headera.onclick = function(){
 			tab();
 		}
